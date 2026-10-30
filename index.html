@@ -1,110 +1,316 @@
 <!DOCTYPE html>
 
-<html lang=“ar” dir=“rtl”>
+<html lang="ar" dir="rtl">
 
 <head>
 
-<meta charset=“UTF-8”>
+  <meta charset="UTF-8">
 
-<meta name=“viewport” content=“width=device-width, initial-scale=1.0”>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Hotel AR</title>
+  <title>HOTEL PRIVA</title>
 
-<style>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-body {
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-  background: #102B3A;
+  <style>
 
-  color: white;
+    * {
 
-  font-family: Arial;
+      box-sizing: border-box;
 
-  text-align: center;
+    }
 
-  padding: 25px;
+    body {
 
-}
+      margin: 0;
 
-h1 { color: #D9B879; }
+      background: #51446C;
 
-button {
+      color: #FFFFFF;
 
-  display: block;
+      font-family: Arial, sans-serif;
 
-  width: 90%;
+      text-align: center;
 
-  margin: 15px auto;
+    }
 
-  padding: 18px;
+    header {
 
-  border: none;
+      padding: 20px;
 
-  border-radius: 12px;
+    }
 
-  font-size: 18px;
+    h1 {
 
-  background: #D9B879;
+      color: #D8C8F0;
 
-  color: #102B3A;
+      font-size: 30px;
 
-}
+      letter-spacing: 2px;
 
-#info {
+      margin-bottom: 8px;
 
-  margin-top: 25px;
+    }
 
-  font-size: 20px;
+    .subtitle {
 
-}
+      color: #F8F5FC;
 
-</style>
+      font-size: 17px;
+
+    }
+
+    #ar-container {
+
+      width: 100%;
+
+      height: 55vh;
+
+      overflow: hidden;
+
+    }
+
+    #services {
+
+      display: none;
+
+      padding: 15px;
+
+    }
+
+    #services h2 {
+
+      color: #D8C8F0;
+
+    }
+
+    .service-btn {
+
+      display: block;
+
+      width: 90%;
+
+      max-width: 400px;
+
+      margin: 12px auto;
+
+      padding: 17px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background: #D8C8F0;
+
+      color: #51446C;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+    .service-btn:active {
+
+      background: #FFFFFF;
+
+    }
+
+    #info {
+
+      background: #F8F5FC;
+
+      color: #51446C;
+
+      padding: 18px;
+
+      margin: 15px auto;
+
+      width: 90%;
+
+      max-width: 400px;
+
+      border-radius: 14px;
+
+      min-height: 55px;
+
+      font-size: 17px;
+
+    }
+
+    #status {
+
+      padding: 10px;
+
+      color: #F8F5FC;
+
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-<h1>🏨 Smart Hotel</h1>
+  <header>
 
-<p>مرحباً بك في فندقنا الذكي</p>
+    <h1>HOTEL PRIVA</h1>
 
-<p>اكتشف خدمات الفندق</p>
+    <p class="subtitle">مرحباً بك في HOTEL PRIVA</p>
 
-<button onclick=“showInfo(‘🍽️ البوفيه متاح من 7 صباحاً إلى 10 صباحاً’)”>
+    <p class="subtitle">فندق بريفا</p>
 
-خدمات البوفيه
+    <p class="subtitle">
 
-</button>
+      وجّه الكاميرا نحو صورة الفندق لاكتشاف الخدمات
 
-<button onclick=“showInfo(‘🏊 المسبح متاح من 8 صباحاً إلى 9 مساءً’)”>
+    </p>
 
-المسبح
+  </header>
 
-</button>
+  <div id="ar-container">
 
-<button onclick=“showInfo(‘🛎️ خدمة الغرف متاحة على مدار الساعة’)”>
+    <a-scene
 
-خدمة الغرف
+      mindar-image="imageTargetSrc: ./targets.mind;"
 
-</button>
+      color-space="sRGB"
 
-<button onclick=“showInfo(‘❄️ يمكنك التحكم بدرجة حرارة المكيف’)”>
+      renderer="colorManagement: true, physicallyCorrectLights"
 
-المكيف
+      vr-mode-ui="enabled: false"
 
-</button>
+      device-orientation-permission-ui="enabled: false">
 
-<div id=“info”>اختر إحدى الخدمات</div>
+      <a-camera
 
-<script>
+        position="0 0 0"
 
-function showInfo(message) {
+        look-controls="enabled: false">
 
-  document.getElementById(“info”).innerText = message;
+      </a-camera>
 
-}
+      <a-entity mindar-image-target="targetIndex: 0">
 
-</script>
+        <a-plane
+
+          color="#D8C8F0"
+
+          opacity="0.9"
+
+          position="0 0 0"
+
+          width="1"
+
+          height="0.5">
+
+        </a-plane>
+
+        <a-text
+
+          value="HOTEL PRIVA"
+
+          color="#51446C"
+
+          align="center"
+
+          position="0 0 0.01"
+
+          width="2">
+
+        </a-text>
+
+      </a-entity>
+
+    </a-scene>
+
+  </div>
+
+  <p id="status">
+
+    في انتظار التعرف على صورة الفندق...
+
+  </p>
+
+  <div id="services">
+
+    <h2>خدمات HOTEL PRIVA</h2>
+
+    <button class="service-btn"
+
+      onclick="showInfo('🍽️ البوفيه متاح من 7 صباحاً إلى 10 صباحاً')">
+
+      خدمات البوفيه
+
+    </button>
+
+    <button class="service-btn"
+
+      onclick="showInfo('🏊 المسبح متاح من 8 صباحاً إلى 9 مساءً')">
+
+      المسبح
+
+    </button>
+
+    <button class="service-btn"
+
+      onclick="showInfo('🛎️ خدمة الغرف متاحة على مدار الساعة')">
+
+      خدمة الغرف
+
+    </button>
+
+    <button class="service-btn"
+
+      onclick="showInfo('❄️ يمكنك التحكم بدرجة حرارة المكيف')">
+
+      المكيف
+
+    </button>
+
+    <div id="info">
+
+      اختر إحدى الخدمات
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function showInfo(message) {
+
+      document.getElementById("info").innerText = message;
+
+    }
+
+    const target = document.querySelector("[mindar-image-target]");
+
+    target.addEventListener("targetFound", () => {
+
+      document.getElementById("services").style.display = "block";
+
+      document.getElementById("status").innerText =
+
+        "تم التعرف على صورة الفندق بنجاح!";
+
+    });
+
+    target.addEventListener("targetLost", () => {
+
+      document.getElementById("services").style.display = "none";
+
+      document.getElementById("status").innerText =
+
+        "وجّه الكاميرا نحو صورة الفندق";
+
+    });
+
+  </script>
 
 </body>
 
