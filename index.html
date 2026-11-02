@@ -1,635 +1,271 @@
+
+تفضل الكود الكامل والجاهز لصفحة فندق بريفا (HOTEL PRIVA) بنسخته الكاملة والمنسقة:
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>HOTEL PRIVA</title>
 
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
   <style>
-
     * {
-
       box-sizing: border-box;
-
     }
 
     body {
-
       margin: 0;
-
       font-family: Arial, sans-serif;
-
-      background: #F8F5FC;
-
-      color: #51446C;
-
+      background: #faf8ff;
+      color: #51446d;
       text-align: center;
-
     }
 
     header {
-
-      background: #51446C;
-
-      color: white;
-
-      padding: 22px 12px;
-
+      background: #eee7ff;
+      padding: 24px 15px;
+      border-radius: 0 0 25px 25px;
     }
 
-    header h1 {
-
+    h1 {
       margin: 0;
-
-      font-size: 27px;
-
-      letter-spacing: 2px;
-
+      font-size: 30px;
+      color: #7961a8;
     }
 
     header p {
-
-      margin: 8px 0 0;
-
-      color: #E5D9F5;
-
+      margin-bottom: 0;
+      font-size: 17px;
     }
 
     .container {
-
+      padding: 20px;
       max-width: 600px;
-
       margin: auto;
-
-      padding: 18px;
-
     }
 
     .hotel-image {
-
       width: 100%;
-
-      display: block;
-
+      max-width: 450px;
       border-radius: 18px;
-
-      border: 3px solid #D8C8F0;
-
-      box-shadow: 0 5px 18px #51446C20;
-
+      box-shadow: 0 5px 18px #d8cbea;
     }
 
-    .section-title {
-
-      margin: 18px 0 12px;
-
-      font-size: 21px;
-
-      color: #51446C;
-
-    }
-
-    .main-button {
-
+    .btn {
       display: block;
-
       width: 100%;
-
+      max-width: 350px;
+      margin: 15px auto;
       padding: 15px;
-
-      margin-top: 12px;
-
       border: none;
-
       border-radius: 14px;
-
-      background: #51446C;
-
+      background: #a98bd5;
       color: white;
-
       font-size: 17px;
-
       font-weight: bold;
-
       text-decoration: none;
-
       cursor: pointer;
-
     }
 
-    .download-button {
-
-      background: #D8C8F0;
-
-      color: #51446C;
-
+    .btn-light {
+      background: #eee7ff;
+      color: #71569b;
+      border: 1px solid #d6c5f1;
     }
 
-    .hint {
-
-      color: #76698B;
-
-      font-size: 14px;
-
-      line-height: 1.8;
-
-      margin: 10px 0;
-
-    }
-
-    #cameraSection {
-
+    #ar-section {
       display: none;
-
-      margin-top: 25px;
-
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      background: black;
     }
 
-    #cameraSection h2 {
-
-      color: #51446C;
-
-    }
-
-    a-scene {
-
+    #ar-section a-scene {
       width: 100%;
-
-      height: 420px;
-
-      display: block;
-
-      border-radius: 16px;
-
-      overflow: hidden;
-
+      height: 100%;
     }
 
     #services {
-
       display: none;
-
-      padding: 15px;
-
-      margin-top: 20px;
-
-      background: #F0EAF8;
-
+      position: absolute;
+      z-index: 20;
+      top: 15px;
+      left: 10px;
+      right: 10px;
+      padding: 12px;
+      background: rgba(250, 248, 255, 0.95);
       border-radius: 18px;
+      max-height: 45%;
+      overflow-y: auto;
+    }
 
+    #services h2 {
+      margin: 5px;
+      color: #71569b;
     }
 
     .service {
-
-      background: white;
-
-      border: 1px solid #D8C8F0;
-
-      border-radius: 14px;
-
-      padding: 14px;
-
-      margin: 12px 0;
-
+      background: #eee7ff;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 12px;
+      color: #51446d;
+      font-weight: bold;
     }
 
-    .service h3 {
-
-      margin: 5px;
-
-      color: #51446C;
-
+    #close-ar {
+      position: absolute;
+      z-index: 30;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
     }
-
-    .service p {
-
-      color: #76698B;
-
-      font-size: 14px;
-
-    }
-
-    .service button {
-
-      background: #51446C;
-
-      color: white;
-
-      border: none;
-
-      border-radius: 20px;
-
-      padding: 10px 20px;
-
-      font-size: 14px;
-
-      cursor: pointer;
-
-    }
-
-    #details {
-
-      display: none;
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 10;
-
-      background: #0009;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-    }
-
-    #detailsContent {
-
-      background: white;
-
-      border-radius: 20px;
-
-      padding: 25px;
-
-      width: 100%;
-
-      max-width: 350px;
-
-    }
-
-    #detailsContent button {
-
-      background: #51446C;
-
-      color: white;
-
-      border: none;
-
-      padding: 10px 25px;
-
-      border-radius: 20px;
-
-      cursor: pointer;
-
-    }
-
-    footer {
-
-      padding: 20px;
-
-      color: #76698B;
-
-      font-size: 13px;
-
-    }
-
   </style>
-
 </head>
 
 <body>
 
   <header>
-
     <h1>HOTEL PRIVA</h1>
-
-    <p>مرحباً بك في فندق بريفا</p>
-
+    <p>مرحباً بك في فندق بريفا 💜</p>
   </header>
 
   <main class="container">
-
-    <h2 class="section-title">صورة فندق بريفا</h2>
+    <h2>اكتشف تجربة فندق بريفا</h2>
 
     <img
-
-      src="./hotel-priva.jpeg"
-
-      alt="HOTEL PRIVA"
-
       class="hotel-image"
-
+      src="./100D3D9A-E964-44E1-94B2-B59596A24379.PNG"
+      alt="صورة فندق بريفا"
     >
-
-    <h2 class="section-title">احفظ الصورة 😊</h2>
-
-    <p class="hint">
-
-      احفظ صورة الفندق على جهازك لاستخدامها في تجربة الواقع المعزز.
-
-    </p>
 
     <a
-
-      href="./hotel-priva.jpeg"
-
-      download="HOTEL-PRIVA.jpeg"
-
-      class="main-button download-button"
-
+      class="btn btn-light"
+      href="./100D3D9A-E964-44E1-94B2-B59596A24379.PNG"
+      download="HOTEL-PRIVA.PNG"
     >
-
       ⬇️ احفظ الصورة 😊
-
     </a>
 
-    <h2 class="section-title" style="margin-top:30px">
-
-      تجربة الواقع المعزز
-
-    </h2>
-
-    <p class="hint">
-
-      اضغط لعرض التجربة، ثم وجّه الكاميرا نحو صورة الفندق المحفوظة.
-
-    </p>
-
-    <button
-
-      class="main-button"
-
-      onclick="startExperience()"
-
-    >
-
+    <button class="btn" onclick="startExperience()">
       📷 اضغط لعرض التجربة
-
     </button>
-
-    <section id="cameraSection">
-
-      <h2>وجّه الكاميرا نحو صورة الفندق</h2>
-
-      <a-scene
-
-        id="arScene"
-
-        mindar-image="imageTargetSrc: ./targets.mind; autoStart: false;"
-
-        embedded
-
-        color-space="sRGB"
-
-        renderer="colorManagement: true"
-
-        vr-mode-ui="enabled: false"
-
-        device-orientation-permission-ui="enabled: false">
-
-        <a-camera
-
-          position="0 0 0"
-
-          look-controls="enabled: false">
-
-        </a-camera>
-
-        <a-entity mindar-image-target="targetIndex: 0">
-
-          <a-plane
-
-            position="0 0 0"
-
-            width="1"
-
-            height="0.6"
-
-            color="#51446C"
-
-            opacity="0.9">
-
-          </a-plane>
-
-          <a-text
-
-            value="HOTEL PRIVA"
-
-            position="0 0.08 0.01"
-
-            align="center"
-
-            color="#FFFFFF"
-
-            width="2">
-
-          </a-text>
-
-          <a-text
-
-            value="Welcome to PRIVA"
-
-            position="0 -0.12 0.01"
-
-            align="center"
-
-            color="#D8C8F0"
-
-            width="1.5">
-
-          </a-text>
-
-        </a-entity>
-
-      </a-scene>
-
-      <div id="services">
-
-        <h2>خدمات فندق بريفا</h2>
-
-        <div class="service">
-
-          <h3>🍽️ البوفيه</h3>
-
-          <p>استمتع بوجبات الفندق</p>
-
-          <button onclick="showDetails('البوفيه','الإفطار من 7 صباحاً إلى 10 صباحاً')">
-
-            عرض التفاصيل
-
-          </button>
-
-        </div>
-
-        <div class="service">
-
-          <h3>🏊 المسبح</h3>
-
-          <p>استمتع بمرافق المسبح</p>
-
-          <button onclick="showDetails('المسبح','متاح من 8 صباحاً إلى 9 مساءً')">
-
-            عرض التفاصيل
-
-          </button>
-
-        </div>
-
-        <div class="service">
-
-          <h3>🛎️ خدمة الغرف</h3>
-
-          <p>خدمة متاحة للنزلاء</p>
-
-          <button onclick="showDetails('خدمة الغرف','متاحة على مدار 24 ساعة')">
-
-            عرض التفاصيل
-
-          </button>
-
-        </div>
-
-        <div class="service">
-
-          <h3>❄️ التحكم بالمكيف</h3>
-
-          <p>معلومات التحكم بدرجة الحرارة</p>
-
-          <button onclick="showDetails('التحكم بالمكيف','يمكنك طلب تعديل درجة حرارة الغرفة من خدمة الغرف')">
-
-            عرض التفاصيل
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
   </main>
 
-  <div id="details">
+  <section id="ar-section">
 
-    <div id="detailsContent">
+    <a-scene
+      id="ar-scene"
+      mindar-image="imageTargetSrc: ./targets.mind; autoStart: false; uiLoading: no; uiScanning: no;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights: true"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
 
-      <h2 id="detailTitle"></h2>
+      <a-camera position="0 0 0" look-controls="enabled: false">
+      </a-camera>
 
-      <p id="detailText"></p>
+      <a-entity mindar-image-target="targetIndex: 0" id="hotel-target">
 
-      <button onclick="closeDetails()">إغلاق</button>
+        <a-text
+          value="HOTEL PRIVA"
+          position="0 0.65 0"
+          align="center"
+          color="#a98bd5"
+          width="2"
+        ></a-text>
 
+        <a-text
+          value="Welcome to PRIVA"
+          position="0 0.4 0"
+          align="center"
+          color="#ffffff"
+          width="1.5"
+        ></a-text>
+
+      </a-entity>
+
+    </a-scene>
+
+    <div id="services">
+      <h2>خدمات فندق بريفا 💜</h2>
+
+      <div class="service">
+        🍽️ البوفيه
+        <p>استمتع بتجربة الطعام في فندق بريفا</p>
+      </div>
+
+      <div class="service">
+        🏊 المسبح
+        <p>منطقة مخصصة للاسترخاء والسباحة</p>
+      </div>
+
+      <div class="service">
+        🛎️ خدمة الغرف
+        <p>خدمات متاحة لراحة النزلاء</p>
+      </div>
+
+      <div class="service">
+        ❄️ التكييف
+        <p>تحكم بخيارات التكييف داخل الغرفة</p>
+      </div>
     </div>
 
-  </div>
+    <button class="btn" id="close-ar" onclick="closeExperience()">
+      إغلاق التجربة
+    </button>
 
-  <footer>
-
-    HOTEL PRIVA ©
-
-  </footer>
+  </section>
 
   <script>
+    async function startExperience() {
+      const section = document.getElementById("ar-section");
+      const scene = document.getElementById("ar-scene");
+      const target = document.getElementById("hotel-target");
 
-    const cameraSection = document.getElementById("cameraSection");
+      section.style.display = "block";
 
-    const scene = document.getElementById("arScene");
-
-    const services = document.getElementById("services");
-
-    let experienceStarted = false;
-
-    function startExperience() {
-
-      cameraSection.style.display = "block";
-
-      cameraSection.scrollIntoView({
-
-        behavior: "smooth"
-
-      });
-
-      if (experienceStarted) return;
-
-      experienceStarted = true;
-
-      function startAR() {
-
-        const mindarSystem = scene.systems["mindar-image-system"];
-
-        if (!mindarSystem) {
-
-          experienceStarted = false;
-
-          alert("تعذر تحميل نظام الواقع المعزز. حاول تحديث الصفحة.");
-
-          return;
-
-        }
-
-        mindarSystem.start().catch(error => {
-
-          experienceStarted = false;
-
-          alert("تعذر تشغيل الكاميرا. تأكد من السماح باستخدامها.");
-
-          console.error(error);
-
+      if (!scene.hasAttribute("data-listeners")) {
+        target.addEventListener("targetFound", function () {
+          document.getElementById("services").style.display = "block";
         });
 
+        target.addEventListener("targetLost", function () {
+          document.getElementById("services").style.display = "none";
+        });
+
+        scene.setAttribute("data-listeners", "true");
       }
 
-      if (scene.hasLoaded) {
-
-        startAR();
-
-      } else {
-
-        scene.addEventListener("loaded", startAR, { once: true });
-
+      if (!scene.hasLoaded) {
+        await new Promise(resolve => {
+          scene.addEventListener("loaded", resolve, { once: true });
+        });
       }
 
+      try {
+        await scene.systems["mindar-image-system"].start();
+      } catch (error) {
+        alert("تعذر تشغيل الكاميرا. تأكدي من السماح باستخدام الكاميرا.");
+        console.error(error);
+      }
     }
 
-    const target = document.querySelector(
+    function closeExperience() {
+      const scene = document.getElementById("ar-scene");
 
-      '[mindar-image-target="targetIndex: 0"]'
+      scene.systems["mindar-image-system"].stop();
 
-    );
-
-    target.addEventListener("targetFound", () => {
-
-      services.style.display = "block";
-
-    });
-
-    target.addEventListener("targetLost", () => {
-
-      services.style.display = "none";
-
-    });
-
-    function showDetails(title, text) {
-
-      document.getElementById("detailTitle").textContent = title;
-
-      document.getElementById("detailText").textContent = text;
-
-      document.getElementById("details").style.display = "flex";
-
+      document.getElementById("ar-section").style.display = "none";
+      document.getElementById("services").style.display = "none";
     }
-
-    function closeDetails() {
-
-      document.getElementById("details").style.display = "none";
-
-    }
-
   </script>
 
 </body>
-
 </html>
+
